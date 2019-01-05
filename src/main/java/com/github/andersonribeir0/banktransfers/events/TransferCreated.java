@@ -1,18 +1,22 @@
 package com.github.andersonribeir0.banktransfers.events;
 
+import java.math.BigDecimal;
+
 public class TransferCreated extends Event{
     private final String from;
     private final String to;
-    private final double amount;
+    private final BigDecimal amount;
+    private final EventType eventType = EventType.TRANSFER;
 
-    public TransferCreated(String from, String to, double amount) {
+    public TransferCreated(String from, String to, BigDecimal amount) {
+        super();
         this.from = from;
         this.to = to;
         this.amount = amount;
     }
 
     public TransferCreated() {
-        this(null,null,0);
+        this(null,null,null);
     }
 
     public String getFrom() {
@@ -23,15 +27,18 @@ public class TransferCreated extends Event{
         return to;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
+    public EventType getEventType() {
+        return eventType;
+    }
 
     @Override
     public String toString() {
         return "TransferCreated{" +
-                "id='" + this.getId() + '\'' +
+                "eventType='" + eventType + '\'' +
                 "from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", amount=" + amount +

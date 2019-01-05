@@ -1,14 +1,20 @@
 package com.github.andersonribeir0.banktransfers.commands;
 
-public class TransferCommand {
+import java.math.BigDecimal;
+
+public class TransferCommand implements Command {
     private final String from;
     private final String to;
-    private final double amount;
+    private final BigDecimal amount;
 
-    public TransferCommand(String from, String to, double amount) {
+    public TransferCommand(String from, String to, BigDecimal amount) {
         this.from = from;
         this.to = to;
         this.amount = amount;
+    }
+
+    public TransferCommand() {
+        this(null,null,null);
     }
 
     public String getFrom() {
@@ -19,7 +25,7 @@ public class TransferCommand {
         return to;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 

@@ -6,10 +6,9 @@ public class TransferCreated extends Event{
     private final String from;
     private final String to;
     private final BigDecimal amount;
-    private final EventType eventType = EventType.TRANSFER;
 
     public TransferCreated(String from, String to, BigDecimal amount) {
-        super();
+        super(EventType.TRANSFER);
         this.from = from;
         this.to = to;
         this.amount = amount;
@@ -31,14 +30,9 @@ public class TransferCreated extends Event{
         return amount;
     }
 
-    public EventType getEventType() {
-        return eventType;
-    }
-
     @Override
     public String toString() {
         return "TransferCreated{" +
-                "eventType='" + eventType + '\'' +
                 "from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", amount=" + amount +

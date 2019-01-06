@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("transfer")
 public class TransferController {
 
-    @Qualifier("transferProcessorImpl")
-    private final EventProcessor transferProcessorImpl;
+    @Qualifier("transferEventProcessorImpl")
+    private final EventProcessor transferEventProcessorImpl;
 
     @Autowired
-    public TransferController(EventProcessor transferProcessorImpl) {
-        this.transferProcessorImpl = transferProcessorImpl;
+    public TransferController(EventProcessor transferEventProcessorImpl) {
+        this.transferEventProcessorImpl = transferEventProcessorImpl;
     }
 
     @PutMapping
     public ResponseEntity transfer(@RequestBody TransferCommand transferCommand) {
-        String eventId = this.transferProcessorImpl.process(transferCommand);
+        String eventId = this.transferEventProcessorImpl.process(transferCommand);
         if(!StringUtils.isEmpty(eventId)) {
             return ResponseEntity.accepted().body(eventId);
         }

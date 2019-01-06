@@ -2,17 +2,17 @@ package com.github.andersonribeir0.banktransfers.events;
 
 import java.math.BigDecimal;
 
-public class DebitDispatched extends Event{
+public class CreditDispatched extends Event{
     private final String targetAccount;
     private final BigDecimal amount;
 
-    public DebitDispatched(String targetAccount, BigDecimal amount) {
-        super(EventType.DEBIT);
+    public CreditDispatched(String targetAccount, BigDecimal amount) {
+        super(EventType.CREDIT);
         this.targetAccount = targetAccount;
         this.amount = amount;
     }
 
-    public DebitDispatched() {
+    public CreditDispatched() {
         this(null, null);
     }
 
@@ -26,7 +26,7 @@ public class DebitDispatched extends Event{
 
     @Override
     public String toString() {
-        return "DebitDispatched{" +
+        return "CreditDispatched{" +
                 "targetAccount='" + targetAccount + '\'' +
                 ", amount=" + amount +
                 '}';

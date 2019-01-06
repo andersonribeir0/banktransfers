@@ -2,6 +2,7 @@ package com.github.andersonribeir0.banktransfers.configurations;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -32,6 +33,12 @@ public class KafkaConfiguration {
 
     @Value("${debits.topic}")
     private String debitsTopic;
+
+    @Value("credits")
+    private String creditsTopic;
+
+    @Value("spring.kafka.consumer.group-id")
+    private String consumerGroup;
 
     @Bean
     public KafkaAdmin admin() {
@@ -67,6 +74,22 @@ public class KafkaConfiguration {
 
     @Bean
     public NewTopic debitsTopic() { return new NewTopic(debitsTopic, 1, (short) 1); }
+
+    @Bean
+    public NewTopic creditsTopic() { return new NewTopic(creditsTopic, 1, (short) 1); }
+
+
+   /* @Bean
+    public Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>(kafkaProperties.buildConsumerProperties());
+
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroup);
+
+        return props;
+    }*/
+
 
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {

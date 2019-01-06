@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.rmi.NoSuchObjectException;
 
 @Service
 public class CreditEventProcessorImpl implements EventProcessor<FinancialOperationCommand> {
@@ -27,7 +26,7 @@ public class CreditEventProcessorImpl implements EventProcessor<FinancialOperati
             this.eventDispatcher.dispatch(creditDispatched.getTargetAccount(), creditDispatched);
             return creditDispatched.getId();
         } catch (NoSuchEventException e) {
-            logger.error("Erro ao processar evento de crédito para conta {0} no valor de {1}.\n" + e.getMessage(), command.getAmount(), command.getAmount().toString());
+            logger.error("Error processing credit event for account {} and amount {}. " + e.getMessage(), command.getAmount(), command.getAmount().toString());
             return "";
         }
     }

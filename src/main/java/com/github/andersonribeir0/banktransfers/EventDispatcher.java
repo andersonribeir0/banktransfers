@@ -36,7 +36,7 @@ public class EventDispatcher {
         } else if(event instanceof CreditDispatched) {
             this.template.send(creditsTopic, key, event);
         } else {
-            throw new NoSuchEventException("Evento inválido.");
+            throw new NoSuchEventException("Invalid event: " + event.toString());
         }
 
     }

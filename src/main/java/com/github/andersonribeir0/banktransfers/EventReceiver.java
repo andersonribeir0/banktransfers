@@ -41,7 +41,7 @@ public class EventReceiver {
         FinancialOperationCommand creditOperation = new FinancialOperationCommand(transferCreated.getTo(), transferCreated.getAmount(), EventType.CREDIT);
         String debitEventId = debitEventProcessorImpl.process(debitOperation);
         String creditEventId = creditEventProcessorImpl.process(creditOperation);
-        logger.info("Débito: {}\tCrédito: {}", debitEventId, creditEventId);
+        logger.info("Debit: {}\tCredit: {}", debitEventId, creditEventId);
     }
 
     @KafkaListener(topics = "debits", clientIdPrefix = "json", containerFactory = "kafkaListenerContainerFactory")

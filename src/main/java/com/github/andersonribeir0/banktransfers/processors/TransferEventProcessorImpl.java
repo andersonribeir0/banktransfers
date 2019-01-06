@@ -29,7 +29,7 @@ public class TransferEventProcessorImpl implements EventProcessor<TransferComman
             this.eventDispatcher.dispatch(transferCreated.getId(), transferCreated);
             return transferCreated.getId();
         } catch (NoSuchEventException e) {
-            logger.error("Erro ao processar evento de transferência de fundos. \n" + command.toString());
+            logger.error("Error processing transfer event. " + command.toString());
             return "";
         }
     }

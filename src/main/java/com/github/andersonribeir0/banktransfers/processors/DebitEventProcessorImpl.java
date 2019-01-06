@@ -25,7 +25,7 @@ public class DebitEventProcessorImpl implements EventProcessor<FinancialOperatio
             this.eventDispatcher.dispatch(debitDispatched.getTargetAccount(), debitDispatched);
             return debitDispatched.getId();
         } catch (NoSuchEventException e) {
-            logger.error("Erro ao processar evento de débito para conta {0} no valor de {1}.\n" + e.getMessage(), financialOperationCommand.getAmount(), financialOperationCommand.getAmount().toString());
+            logger.error("Error processing debit event for account {0} and amount {1}. " + e.getMessage(), financialOperationCommand.getAmount(), financialOperationCommand.getAmount().toString());
             return "";
         }
     }

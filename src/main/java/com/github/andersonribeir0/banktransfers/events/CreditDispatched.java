@@ -2,7 +2,7 @@ package com.github.andersonribeir0.banktransfers.events;
 
 import java.math.BigDecimal;
 
-public class CreditDispatched extends Event{
+public class CreditDispatched extends Event {
     private final String targetAccount;
     private final BigDecimal amount;
 

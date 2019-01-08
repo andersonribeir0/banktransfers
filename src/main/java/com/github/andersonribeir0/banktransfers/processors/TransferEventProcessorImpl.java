@@ -1,15 +1,13 @@
 package com.github.andersonribeir0.banktransfers.processors;
 
-import com.github.andersonribeir0.banktransfers.EventDispatcher;
 import com.github.andersonribeir0.banktransfers.commands.TransferCommand;
 import com.github.andersonribeir0.banktransfers.events.TransferCreated;
-import com.github.andersonribeir0.banktransfers.exceptions.NoSuchEventException;
+import com.github.andersonribeir0.banktransfers.events.dispatchers.EventDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import java.rmi.NoSuchObjectException;
 
 @Service
 public class TransferEventProcessorImpl implements EventProcessor<TransferCommand> {
@@ -18,19 +16,14 @@ public class TransferEventProcessorImpl implements EventProcessor<TransferComman
     private final EventDispatcher eventDispatcher;
 
     @Autowired
-    public TransferEventProcessorImpl(EventDispatcher eventDispatcher) {
+    public TransferEventProcessorImpl(@Qualifier("transferEventDispatcherImpl") EventDispatcher eventDispatcher) {
         this.eventDispatcher = eventDispatcher;
     }
 
     @Override
     public String process(TransferCommand command) {
-        try {
-            TransferCreated transferCreated = new TransferCreated(command.getFrom(), command.getTo(), command.getAmount());
-            this.eventDispatcher.dispatch(transferCreated.getId(), transferCreated);
-            return transferCreated.getId();
-        } catch (NoSuchEventException e) {
-            logger.error("Error processing transfer event. " + command.toString());
-            return "";
-        }
+        TransferCreated transferCreated = new TransferCreated(command.getFrom(), command.getTo(), command.getAmount());
+        this.eventDispatcher.dispatch(transferCreated.getId(), transferCreated);
+        return transferCreated.getId();
     }
 }

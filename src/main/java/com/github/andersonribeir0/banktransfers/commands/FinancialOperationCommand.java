@@ -17,7 +17,7 @@ public class FinancialOperationCommand implements Command {
     }
 
     public FinancialOperationCommand() {
-        this(null,null, null);
+        this(null, null, null);
     }
 
     public String getTargetAccount() {
@@ -28,5 +28,7 @@ public class FinancialOperationCommand implements Command {
         return amount;
     }
 
-    public EventType getEventType() { return eventType; }
+    public EventType getEventType() {
+        return eventType;
+    }
 }

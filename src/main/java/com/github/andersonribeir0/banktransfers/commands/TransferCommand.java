@@ -14,7 +14,7 @@ public class TransferCommand implements Command {
     }
 
     public TransferCommand() {
-        this(null,null,null);
+        this(null, null, null);
     }
 
     public String getFrom() {

@@ -2,7 +2,7 @@ package com.github.andersonribeir0.banktransfers.events;
 
 import java.math.BigDecimal;
 
-public class TransferCreated extends Event{
+public class TransferCreated extends Event {
     private final String from;
     private final String to;
     private final BigDecimal amount;
@@ -15,7 +15,7 @@ public class TransferCreated extends Event{
     }
 
     public TransferCreated() {
-        this(null,null,null);
+        this(null, null, null);
     }
 
     public String getFrom() {

@@ -2,7 +2,6 @@ package com.github.andersonribeir0.banktransfers.configurations;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -16,7 +15,6 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,17 +64,20 @@ public class KafkaConfiguration {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    //Como se trata de uma PoC, o número de partições e o fator de replicação estão setados como 1. Em um ambiente de produção, deve-se usar esses valores de modo a ter HA e escala.
     @Bean
     public NewTopic transfersTopic() {
         return new NewTopic(transfersTopic, 3, (short) 1);
     }
 
     @Bean
-    public NewTopic debitsTopic() { return new NewTopic(debitsTopic, 1, (short) 1); }
+    public NewTopic debitsTopic() {
+        return new NewTopic(debitsTopic, 3, (short) 1);
+    }
 
     @Bean
-    public NewTopic creditsTopic() { return new NewTopic(creditsTopic, 1, (short) 1); }
+    public NewTopic creditsTopic() {
+        return new NewTopic(creditsTopic, 3, (short) 1);
+    }
 
 
    /* @Bean

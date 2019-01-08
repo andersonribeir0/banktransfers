@@ -13,7 +13,7 @@ public class TransferEventDispatcherImpl implements EventDispatcher {
     private final String topic;
 
     @Autowired
-    public TransferEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("transfer.topic") String topic) {
+    public TransferEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("${transfers.topic}") String topic) {
         this.template = template;
         this.topic = topic;
     }

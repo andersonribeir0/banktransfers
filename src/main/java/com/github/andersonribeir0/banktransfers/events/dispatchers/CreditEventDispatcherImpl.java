@@ -13,7 +13,7 @@ public class CreditEventDispatcherImpl implements EventDispatcher {
     private final String topic;
 
     @Autowired
-    public CreditEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("credits.topic") String topic) {
+    public CreditEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("${credits.topic}") String topic) {
         this.template = template;
         this.topic = topic;
     }

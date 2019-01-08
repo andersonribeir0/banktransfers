@@ -13,7 +13,7 @@ public class DebitEventDispatcherImpl implements EventDispatcher {
     private final String topic;
 
     @Autowired
-    public DebitEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("debits.topic") String topic) {
+    public DebitEventDispatcherImpl(KafkaTemplate<String, Object> template, @Value("${debits.topic}") String topic) {
         this.template = template;
         this.topic = topic;
     }
